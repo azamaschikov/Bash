@@ -9,7 +9,7 @@ BACKUP_COUNT="3"
 BACKUP_DIR=("/etc" "/srv" "/var/named" "/var/spool/cron")
 
 ENCRYPT="1"
-ENCRYPT_KEY="password"
+ENCRYPT_KEY="key"
 
 TEMP_DIR="/tmp/backup"
 JOURNAL_FILE="/var/log/backup.log"
