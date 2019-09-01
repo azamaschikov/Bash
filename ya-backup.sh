@@ -82,7 +82,7 @@ if [[ $ENCRYPT == "1" ]]
 			done
 fi
 
-for FILE in $(getlistbackup | grep $(date '+%d-%m-%Y' --date="$BACKUP_MAX days ago"))
+for FILE in $(getlistbackup | grep $(date '+%d-%m-%Y' --date="$BACKUP_COUNT days ago"))
 	do
 		deletebackup
 		event "Удаляется файл: $FILE"
