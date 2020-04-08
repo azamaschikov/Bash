@@ -9,11 +9,11 @@ if [ "$EUID" -ne 0 ]
 fi
 
 if [ -f "$CONFIG" ]
-        then
-                echo "Sorry, $CONFIG is exist"
-                exit 1
-        else 
-                echo '{"default-address-pools":[{"base":"10.10.0.0/16","size":24}]}' > "$CONFIG"
+    then
+        echo "Sorry, $CONFIG is exist"
+        exit 1
+    else 
+        echo '{"default-address-pools":[{"base":"10.10.0.0/16","size":24}]}' > "$CONFIG"
 fi
 
 for ct in $(docker ps -qa)
