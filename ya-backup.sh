@@ -16,29 +16,29 @@ JOURNAL_FILE="/var/log/backup.log"
 
 TIMESTAMP=$(date '+%d-%m-%Y')
 
-function event () {
+function event {
 	echo "[$(date '+%a %b %d %T %Y')] - $1" >> $JOURNAL_FILE
 }
 
-function getlistbase () {
+function getlistbase {
 	mysql -NB -u$MYSQL_USER -p$MYSQL_PASS -e "SHOW DATABASES" | egrep -v "[[:alpha:]]_schema$" | egrep -v "^mysql$"
 }
 
-function getuploadurl () {
+function getuploadurl {
 	URL="https://cloud-api.yandex.net/v1/disk/resources/upload/?path=app:/$FILE&overwrite=true"
 	curl -sX GET -H "Authorization: OAuth $OAUTH_TOKEN" "$URL" | jq -r ".href"
 }
 
-function getlistbackup () {
+function getlistbackup {
 	URL="https://cloud-api.yandex.net/v1/disk/resources?path=app:/&sort=created"
 	curl -sX GET -H "Authorization: OAuth $OAUTH_TOKEN" "$URL" | jq -r "._embedded.items[].name"
 }
 
-function uploadbackup () {
+function uploadbackup {
 	curl -sX PUT -T $1 $(getuploadurl)
 }
 
-function deletebackup () {
+function deletebackup {
 	URL="https://cloud-api.yandex.net/v1/disk/resources?path=app:/$FILE&permanently=true"
 	curl -sX DELETE -H "Authorization: OAuth $OAUTH_TOKEN" "$URL"
 }
