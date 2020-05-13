@@ -56,6 +56,10 @@ if [[ -d "$BACKUP" ]]
        backup
 fi
 
+echo -n "Restarting Docker ... "
+systemctl restart docker.service
+state
+
 for CT in $(docker ps -qa --no-trunc)
 do
     NETWORK_ID="$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}' $CT)"
